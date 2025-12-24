@@ -1,0 +1,47 @@
+#include <stdio.h>
+
+int main() {
+    FILE *fp;
+
+    fp = fopen("users.csv", "w");
+    if (fp == NULL) {
+        printf("File not created\n");
+        return 1;
+    }
+
+    fprintf(fp, "Name,PRN\n");   // CSV header
+    fclose(fp);
+
+    printf("users.csv file created successfully\n");
+    return 0;
+}
+
+#include <stdio.h>
+
+int main() {
+    FILE *fp;
+    char name[50];
+    char prn[20];
+    int i;
+
+    fp = fopen("users.csv", "a");   // append mode
+    if (fp == NULL) {
+        printf("Error opening file\n");
+        return 1;
+    }
+
+    for (i = 0; i < 5; i++) {
+        printf("Enter Name of user %d: ", i + 1);
+        scanf("%s", name);
+
+        printf("Enter PRN of user %d: ", i + 1);
+        scanf("%s", prn);
+
+        fprintf(fp, "%s,%s\n", name, prn);
+    }
+
+    fclose(fp);
+    printf("Data written successfully\n");
+
+    return 0;
+}
