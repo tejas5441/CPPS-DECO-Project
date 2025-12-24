@@ -1,0 +1,25 @@
+#include <stdio.h>
+
+int main() {
+    FILE *fp;
+    char name[50];
+    char prn[20];
+    char line[100];
+
+    fp = fopen("users.csv", "r");
+    if (fp == NULL) {
+        printf("File not found\n");
+        return 1;
+    }
+
+    fgets(line, sizeof(line), fp); // skip header
+
+    printf("\nUser Details:\n");
+
+    while (fscanf(fp, "%49[^,],%19s\n", name, prn) == 2) {
+        printf("Name: %s  PRN: %s\n", name, prn);
+    }
+
+    fclose(fp);
+    return 0;
+}
